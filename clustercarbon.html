@@ -10,7 +10,7 @@
         margin: 0;
         padding: 0;
     }
-    container {
+    .container {
         width: 50%;
         margin: auto;
         padding: 20px; /* Ajoute un padding autour du container */
@@ -22,7 +22,7 @@
         text-align: center;
         padding: 1em 0;
     }
-    content {
+    .content {
         padding: 30px;
     }
     p {
@@ -61,9 +61,7 @@
 
             // Affiche le résultat à l'utilisateur dans la page HTML
 
-            document.write("<p><span style='color:red;'>de</span><span style='font-weight:bold;'>mo</span></p>");
-            
-            document.write("<p>Le coût carbone pour " + heures + " heures de calcul est de <span style='color:red;'>" + cout_carbone.toFixed(2) + " kgCO2e.</spam></p>");
+            document.write("<p>Le coût carbone pour <span style='color:green;'>" + heures + " heures</span> de calcul est de <span style='color:red;'>" + cout_carbone.toFixed(2) + " kgCO2e.</spam></p>");
             document.write("<p>Cela équivaut à environ :</p>");
             document.write("<ul><li><span style='color:red;'>" + avion_courte_distance.toFixed(2) + " km</span> en avion sur une courte distance par personne,</li>");
             document.write("<li><span style='color:red;'>" + avion_longue_distance.toFixed(2) + " km</span> en avion sur une longue distance par personne.</li></ul>");
