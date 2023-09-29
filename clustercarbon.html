@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Calculateur de Coût Carbone</title>
+</head>
+<body>
+
+<script>
+// Demande à l'utilisateur de saisir un nombre d'heures
+let heures = prompt("Veuillez entrer le nombre d'heures de calcul sur un GPU d'un super calculateur :");
+
+// Convertit la saisie de l'utilisateur en un nombre décimal
+heures = parseFloat(heures);
+
+// Vérifie si la saisie de l'utilisateur est un nombre
+if(isNaN(heures) || heures < 0) {
+    alert("Veuillez entrer un nombre valide d'heures.");
+} else {
+    // Calculer le coût carbone
+    const kWh_par_heure = 0.482;
+    const kgCO2_par_kWh = 0.035;
+    
+    let cout_carbone = heures * kWh_par_heure * kgCO2_par_kWh;
+    
+    // Affiche le résultat à l'utilisateur
+    alert("Le coût carbone pour " + heures + " heures de calcul est de " + cout_carbone.toFixed(2) + " kgCO2e.");
+}
+</script>
+
+</body>
+</html>
