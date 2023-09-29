@@ -23,21 +23,17 @@ if(isNaN(heures) || heures < 0) {
     
     let cout_carbone = heures * kWh_par_heure * kgCO2_par_kWh;
     
-    // Calculer les équivalents en distance pour divers moyens de transport
-    let energie_utilisee = heures * kWh_par_heure; // Total d'énergie utilisée en kWh
-    
-    let equivalent_repos = energie_utilisee / 0.1; // Équivalent en heures d'un humain au repos
-    let equivalent_velo = energie_utilisee / 0.2; // Équivalent en km à vélo
-    let equivalent_train = energie_utilisee / 0.11; // Équivalent en km en train
-    let equivalent_avion = energie_utilisee / 0.3; // Équivalent en km en avion
+    // Calculer les équivalents en distance pour les avions
+    let avion_courte_distance = cout_carbone / 0.23; // Équivalent en km en avion courte distance
+    let avion_longue_distance = cout_carbone / 0.152; // Équivalent en km en avion longue distance
     
     // Affiche le résultat à l'utilisateur
     alert("Le coût carbone pour " + heures + " heures de calcul est de " + cout_carbone.toFixed(2) + " kgCO2e.\n" +
           "Cela équivaut à environ :\n" +
-          "- " + equivalent_repos.toFixed(2) + " heures d'un humain au repos,\n" +
-          "- " + equivalent_velo.toFixed(2) + " km à vélo par un cycliste,\n" +
-          "- " + equivalent_train.toFixed(2) + " km en train par passager,\n" +
-          "- " + equivalent_avion.toFixed(2) + " km en avion par passager.");
+          "- " + avion_courte_distance.toFixed(2) + " km en avion sur une courte distance par personne,\n" +
+          "- " + avion_longue_distance.toFixed(2) + " km en avion sur une longue distance par personne.\n\n" +
+          "Les valeurs utilisées proviennent des données disponibles sur le site du supercalculateur Jean Zay et des données disponibles sur le site de l'ADEME pour les moyens de transport.\n" +
+          "Cette page a été entièrement générée par ChatGPT4 (sept 25 version) avec les prompts fournis et relu par un humain.");
 }
 </script>
 
