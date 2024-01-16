@@ -4,10 +4,10 @@
     <title>Check Date 10:02</title>
 </head>
 <body>
-    <input type="date" id="dateInput" placeholder="Entrez une date">
-    <button onclick="checkDate()">Vérifier</button>
-    <p id="result"></p>
-    <p id="debug"></p>
+    <input type="date" id="startDateInput" placeholder="Date de début">
+    <input type="date" id="endDateInput" placeholder="Date de fin">
+    <button onclick="calculateWorkingDays()">Calculer</button>
+    <div id="result"></div>
 
     <script>
         function JoursFeries(an) {
@@ -40,37 +40,52 @@
         }
 
         function createDateFromInput(input) {
-            var parts = input.split('-'); // Splits the input date into parts
-            return new Date(parts[0], parts[1] - 1, parts[2]); // Creates a date object
+            var parts = input.split('-');
+            return new Date(parts[0], parts[1] - 1, parts[2]);
         }
-        
-        function checkDate() {
-            var input = document.getElementById('dateInput').value;
-            var date = createDateFromInput(input);
-        
-            var day = date.getDay();
-            var year = date.getFullYear();
-        
-            var isWeekend = (day === 6) || (day === 0); // 6 = Saturday, 0 = Sunday
-        
-            var debugElement = document.getElementById('debug');
-            debugElement.innerHTML = ''; // Clear previous content
-        
-            var holidays = JoursFeries(year).map(function(holiday) {
-                var holidayText = "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString() + "<br>";
-                debugElement.innerHTML += holidayText; // Append each holiday date to the debug element
-        
-                // Adjust the holiday dates to the same format as the input
-                return new Date(holiday.getFullYear(), holiday.getMonth(), holiday.getDate());
+
+        function calculateWorkingDays() {
+            var startDate = createDateFromInput(document.getElementById('startDateInput').value);
+            var endDate = createDateFromInput(document.getElementById('endDateInput').value);
+            var current = new Date(startDate);
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = '';
+
+            var workingDays = {};
+            var holidays = JoursFeries(current.getFullYear());
+
+            while (current <= endDate) {
+                if (!workingDays[current.getFullYear()]) {
+                    workingDays[current.getFullYear()] = {};
+                }
+                if (!workingDays[current.getFullYear()][current.getMonth() + 1]) {
+                    workingDays[current.getFullYear()][current.getMonth() + 1] = 0;
+                }
+                
+                // Check if the current day is a weekend or a holiday
+                if (current.getDay() !== 0 && current.getDay() !== 6 && !isHoliday(current, holidays)) {
+                    workingDays[current.getFullYear()][current.getMonth() + 1]++;
+                }
+
+                current.setDate(current.getDate() + 1);
+                if (current.getFullYear() !== holidays[0].getFullYear()) {
+                    holidays = JoursFeries(current.getFullYear());
+                }
+            }
+
+            for (var year in workingDays) {
+                for (var month in workingDays[year]) {
+                    var p = document.createElement('p');
+                    p.textContent = "Year: " + year + ", Month: " + month + ", Working Days: " + workingDays[year][month];
+                    resultElement.appendChild(p);
+                }
+            }
+        }
+
+        function isHoliday(date, holidays) {
+            return holidays.some(function(holiday) {
+                return date.getDate() === holiday.getDate() && date.getMonth() === holiday.getMonth();
             });
-        
-            var isHoliday = holidays.some(function(holiday) {
-                // Compare the time values of the dates for equality
-                return date.getTime() === holiday.getTime();
-            });
-        
-            var resultText = isWeekend ? "Week-end" : (isHoliday ? "Jour férié" : "Jour de semaine");
-            document.getElementById('result').innerText = input + " --> " + resultText;
         }
     </script>
 </body>
