@@ -47,6 +47,7 @@
 
             var holidays = JoursFeries(year);
             var isHoliday = holidays.some(function(holiday) {
+                console.log("Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString());
                 return date.getTime() === holiday.getTime();
             });
 
