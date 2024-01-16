@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Check Date 09:58</title>
+    <title>Check Date 10:02</title>
 </head>
 <body>
     <input type="date" id="dateInput" placeholder="Entrez une date">
@@ -43,28 +43,32 @@
             var parts = input.split('-'); // Splits the input date into parts
             return new Date(parts[0], parts[1] - 1, parts[2]); // Creates a date object
         }
-
+        
         function checkDate() {
             var input = document.getElementById('dateInput').value;
             var date = createDateFromInput(input);
-
+        
             var day = date.getDay();
             var year = date.getFullYear();
-
+        
             var isWeekend = (day === 6) || (day === 0); // 6 = Saturday, 0 = Sunday
-
+        
+            var debugElement = document.getElementById('debug');
+            debugElement.innerHTML = ''; // Clear previous content
+        
             var holidays = JoursFeries(year).map(function(holiday) {
-                document.getElementById('debug').innerText =  "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString(); // debug
-                
+                var holidayText = "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString() + "<br>";
+                debugElement.innerHTML += holidayText; // Append each holiday date to the debug element
+        
                 // Adjust the holiday dates to the same format as the input
                 return new Date(holiday.getFullYear(), holiday.getMonth(), holiday.getDate());
             });
-
+        
             var isHoliday = holidays.some(function(holiday) {
                 // Compare the time values of the dates for equality
                 return date.getTime() === holiday.getTime();
             });
-
+        
             var resultText = isWeekend ? "Week-end" : (isHoliday ? "Jour férié" : "Jour de semaine");
             document.getElementById('result').innerText = input + " --> " + resultText;
         }
