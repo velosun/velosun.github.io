@@ -53,6 +53,7 @@
             var isWeekend = (day === 6) || (day === 0); // 6 = Saturday, 0 = Sunday
 
             var holidays = JoursFeries(year).map(function(holiday) {
+                var p = document.createElement('p');
                 p.textContent = "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString(); // debug
                 output.appendChild(p); // debug
                 // Adjust the holiday dates to the same format as the input
