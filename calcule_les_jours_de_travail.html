@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Check Date 09:55</title>
+    <title>Check Date 09:58</title>
 </head>
 <body>
     <input type="date" id="dateInput" placeholder="Entrez une date">
@@ -19,7 +19,6 @@
             var Toussaint = new Date(an, "10", "01");
             var Armistice = new Date(an, "10", "11");
             var Noel = new Date(an, "11", "25");
-            var SaintEtienne = new Date(an, "11", "26");
 
             var G = an % 19;
             var C = Math.floor(an / 100);
@@ -30,13 +29,13 @@
             var MoisPaques = 3 + Math.floor((L + 40) / 44);
             var JourPaques = L + 28 - 31 * Math.floor(MoisPaques / 4);
             var Paques = new Date(an, MoisPaques - 1, JourPaques);
-            var VendrediSaint = new Date(an, MoisPaques - 1, JourPaques - 2);
+            //var VendrediSaint = new Date(an, MoisPaques - 1, JourPaques - 2);
             var LundiPaques = new Date(an, MoisPaques - 1, JourPaques + 1);
             var Ascension = new Date(an, MoisPaques - 1, JourPaques + 39);
             var Pentecote = new Date(an, MoisPaques - 1, JourPaques + 49);
             var LundiPentecote = new Date(an, MoisPaques - 1, JourPaques + 50);
 
-            return [JourAn, FeteTravail, Victoire1945, FeteNationale, Assomption, Toussaint, Armistice, SaintEtienne, VendrediSaint, Paques, LundiPaques, Ascension, Pentecote, LundiPentecote, Noel];
+            return [JourAn, FeteTravail, Victoire1945, FeteNationale, Assomption, Toussaint, Armistice, Paques, LundiPaques, Ascension, Pentecote, LundiPentecote, Noel];
         }
 
         function createDateFromInput(input) {
