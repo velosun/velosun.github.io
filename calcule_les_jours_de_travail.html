@@ -7,6 +7,7 @@
     <input type="date" id="dateInput" placeholder="Entrez une date">
     <button onclick="checkDate()">Vérifier</button>
     <p id="result"></p>
+    <p id="debug"></p>
 
     <script>
         function JoursFeries(an) {
@@ -53,9 +54,8 @@
             var isWeekend = (day === 6) || (day === 0); // 6 = Saturday, 0 = Sunday
 
             var holidays = JoursFeries(year).map(function(holiday) {
-                var p = document.createElement('p');
-                p.textContent = "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString(); // debug
-                output.appendChild(p); // debug
+                document.getElementById('debug').innerText =  "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString(); // debug
+                
                 // Adjust the holiday dates to the same format as the input
                 return new Date(holiday.getFullYear(), holiday.getMonth(), holiday.getDate());
             });
