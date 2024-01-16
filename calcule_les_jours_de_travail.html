@@ -10,7 +10,6 @@
 
     <script>
         function JoursFeries(an) {
-            function JoursFeries(an) {
             var JourAn = new Date(an, "00", "01");
             var FeteTravail = new Date(an, "04", "01");
             var Victoire1945 = new Date(an, "04", "08");
@@ -54,6 +53,8 @@
             var isWeekend = (day === 6) || (day === 0); // 6 = Saturday, 0 = Sunday
 
             var holidays = JoursFeries(year).map(function(holiday) {
+                p.textContent = "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString(); // debug
+                output.appendChild(p); // debug
                 // Adjust the holiday dates to the same format as the input
                 return new Date(holiday.getFullYear(), holiday.getMonth(), holiday.getDate());
             });
