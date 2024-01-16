@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Check Date 10:08</title>
+    <title>Check Date 10:21</title>
 </head>
 <body>
     <input type="date" id="startDateInput" placeholder="Date de début">
@@ -34,7 +34,7 @@
             var LundiPaques = new Date(an, MoisPaques - 1, JourPaques + 1);
             var Ascension = new Date(an, MoisPaques - 1, JourPaques + 39);
             var Pentecote = new Date(an, MoisPaques - 1, JourPaques + 49);
-            var LundiPentecote = new Date(an, MoisPaques - 1, JourPaques + 50);
+            var LundiPentecote = new Date(an, MoisPaques - 1, JourPaques + 50); // optionnel ?
 
             return [JourAn, FeteTravail, Victoire1945, FeteNationale, Assomption, Toussaint, Armistice, Paques, LundiPaques, Ascension, Pentecote, LundiPentecote, Noel];
         }
@@ -52,6 +52,7 @@
             resultElement.innerHTML = '';
 
             var workingDays = {};
+            var totalWorkingDays = 0;
             var holidays = JoursFeries(current.getFullYear());
 
             while (current <= endDate) {
@@ -65,6 +66,7 @@
                 // Check if the current day is a weekend or a holiday
                 if (current.getDay() !== 0 && current.getDay() !== 6 && !isHoliday(current, holidays)) {
                     workingDays[current.getFullYear()][current.getMonth() + 1]++;
+                    totalWorkingDays++;
                 }
 
                 current.setDate(current.getDate() + 1);
@@ -80,6 +82,11 @@
                     resultElement.appendChild(p);
                 }
             }
+
+            // Display the total number of working days
+            var totalP = document.createElement('p');
+            totalP.textContent = "Total Working Days: " + totalWorkingDays;
+            resultElement.appendChild(totalP);
         }
 
         function isHoliday(date, holidays) {
