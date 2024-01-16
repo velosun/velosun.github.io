@@ -59,8 +59,6 @@
             });
 
             var isHoliday = holidays.some(function(holiday) {
-                p.textContent = "Input Date: " + date.toDateString() + ", Holiday: " + holiday.toDateString(); // debug
-                output.appendChild(p); // debug
                 // Compare the time values of the dates for equality
                 return date.getTime() === holiday.getTime();
             });
