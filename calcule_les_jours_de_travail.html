@@ -9,7 +9,7 @@
     <p id="result"></p>
 
     <script>
-        function JoursFeries (an){
+        function JoursFeries (an){ // source: https://codes-sources.commentcamarche.net/source/16245-calcul-des-jours-feries
         	var JourAn = new Date(an, "00", "01")
         	var FeteTravail = new Date(an, "04", "01")
         	var Victoire1945 = new Date(an, "04", "08")
@@ -18,7 +18,6 @@
         	var Toussaint = new Date(an, "10", "01")
         	var Armistice = new Date(an, "10", "11")
         	var Noel = new Date(an, "11", "25")
-        	var SaintEtienne = new Date(an, "11", "26")
         	
         	var G = an%19
         	var C = Math.floor(an/100)
@@ -29,13 +28,13 @@
         	var MoisPaques = 3 + Math.floor((L + 40)/44)
         	var JourPaques = L + 28 - 31*Math.floor(MoisPaques/4)
         	var Paques = new Date(an, MoisPaques-1, JourPaques)
-        	var VendrediSaint = new Date(an, MoisPaques-1, JourPaques-2)
+        	//var VendrediSaint = new Date(an, MoisPaques-1, JourPaques-2)
         	var LundiPaques = new Date(an, MoisPaques-1, JourPaques+1)
         	var Ascension = new Date(an, MoisPaques-1, JourPaques+39)
         	var Pentecote = new Date(an, MoisPaques-1, JourPaques+49)
         	var LundiPentecote = new Date(an, MoisPaques-1, JourPaques+50)
         	
-        	return new Array(JourAn, VendrediSaint, Paques, LundiPaques, FeteTravail, Victoire1945, Ascension, Pentecote, LundiPentecote, FeteNationale, Assomption, Toussaint, Armistice, Noel, SaintEtienne)
+        	return new Array(JourAn, Paques, LundiPaques, FeteTravail, Victoire1945, Ascension, Pentecote, LundiPentecote, FeteNationale, Assomption, Toussaint, Armistice, Noel)
         }
 
         function checkDate() {
@@ -56,7 +55,7 @@
                 resultText = "Jour férié";
             }
 
-            document.getElementById('result').innerText = input + resultText;
+            document.getElementById('result').innerText = resultText;
         }
     </script>
 </body>
